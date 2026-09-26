@@ -1,0 +1,81 @@
+{
+  "train_n": 8400,
+  "val_n": 1800,
+  "test_n": 1800,
+  "train_pos_rate": 0.1957142857142857,
+  "val_pos_rate": 0.2061111111111111,
+  "test_pos_rate": 0.18722222222222223,
+  "dummy_accuracy": 0.7938888888888889,
+  "logreg": {
+    "precision": 0.3029925187032419,
+    "recall": 0.6549865229110512,
+    "f1": 0.4143222506393862,
+    "pr_auc": 0.32413819607857475
+  },
+  "rf": {
+    "precision": 0.30575035063113604,
+    "recall": 0.5876010781671159,
+    "f1": 0.4022140221402214,
+    "pr_auc": 0.34261568880393833
+  },
+  "rf_confusion_matrix": [
+    [
+      934,
+      495
+    ],
+    [
+      153,
+      218
+    ]
+  ],
+  "top_features": [
+    {
+      "feature": "log_amount",
+      "importance": 0.1673333073519577
+    },
+    {
+      "feature": "Transaction_Type_Transfer",
+      "importance": 0.09230832162852792
+    },
+    {
+      "feature": "cust_running_avg_amount",
+      "importance": 0.06443067665940597
+    },
+    {
+      "feature": "hour_cos",
+      "importance": 0.0644233475787093
+    },
+    {
+      "feature": "Digital_Engagement_Score",
+      "importance": 0.06187063915560151
+    },
+    {
+      "feature": "Tenure_Months",
+      "importance": 0.06181078875655949
+    },
+    {
+      "feature": "is_overnight",
+      "importance": 0.058273713552263226
+    },
+    {
+      "feature": "hour_sin",
+      "importance": 0.04892666190660782
+    },
+    {
+      "feature": "International_Transaction_1",
+      "importance": 0.034776682193298485
+    },
+    {
+      "feature": "International_Transaction_0",
+      "importance": 0.03402050779049127
+    },
+    {
+      "feature": "Transaction_Type_Card Purchase",
+      "importance": 0.031844309226373275
+    },
+    {
+      "feature": "Transaction_Type_Cash Withdrawal",
+      "importance": 0.022374786623992986
+    }
+  ]
+}
