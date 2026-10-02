@@ -1,0 +1,50 @@
+{
+  "model_selected": "Random Forest (n_estimators=300, max_depth=8, class_weight='balanced')",
+  "tuned_threshold": 0.44309048016951263,
+  "validation_metrics_tuned": {
+    "precision": 0.2950474183350896,
+    "recall": 0.7547169811320755,
+    "f1": 0.42424242424242425,
+    "roc_auc": 0.6767554639268598
+  },
+  "test_metrics_tuned": {
+    "accuracy": 0.575,
+    "precision": 0.2683982683982684,
+    "recall": 0.7359050445103857,
+    "f1": 0.39333862014274384,
+    "roc_auc": 0.6813608069269478,
+    "pr_auc": 0.31734830211502
+  },
+  "test_confusion_matrix": [
+    [
+      787,
+      676
+    ],
+    [
+      89,
+      248
+    ]
+  ],
+  "features": {
+    "categorical": [
+      "Transaction_Type",
+      "Channel",
+      "Device_Type",
+      "International_Transaction",
+      "Customer_Segment",
+      "Account_Status",
+      "Monthly_Income_Band"
+    ],
+    "numeric": [
+      "log_amount",
+      "hour_sin",
+      "hour_cos",
+      "is_overnight",
+      "Tenure_Months",
+      "Digital_Engagement_Score",
+      "cust_running_avg_amount",
+      "cust_prior_flag_rate",
+      "amount_vs_cust_avg_ratio"
+    ]
+  }
+}
