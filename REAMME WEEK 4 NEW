@@ -1,0 +1,98 @@
+# FinTrust Digital Bank — Data Science Track
+### AnalystLab Africa · Experience Lab Internship Programme
+
+> A 4-week, end-to-end data science project for **FinTrust Digital Bank**, a fictional digital banking organisation built for the AnalystLab Africa Experience Lab. This repository documents my work on the **Data Science track**: turning raw customer and transaction data into a predictive risk-review model, from problem definition through to a final, validated, and documented solution.
+
+**All customers, transactions, and financial information in this project are synthetic and used for educational purposes only.**
+
+---
+
+## ✅ Project Status: Complete (All 4 Weeks)
+
+## 🏦 About FinTrust
+
+FinTrust Digital Bank is a simulated digital banking organisation seeking to use data, machine learning, and generative AI to understand customer and transaction behaviour, support risk-related decision-making, and strengthen digital customer support. Interns across five tracks — Data Analytics, Data Science, ML Engineering, Generative AI, and Project Management — contribute to one integrated solution over four weeks.
+
+## 🎯 My Track: Data Science
+
+**Goal:** Determine whether FinTrust's transaction data can support a predictive model that flags transactions likely to need manual risk review — and build that model responsibly, with every assumption, decision, and limitation documented along the way.
+
+**Core dataset:**
+- `FinTrust_Customer_Data.xlsx` — 1,500 customer records
+- `FinTrust_Transaction_Data.xlsx` — 12,000 transaction records
+- Target variable: `Risk_Review_Flag` — a synthetic educational label, *not* a real fraud determination
+
+## 🗺️ Project Roadmap
+
+| Week | Focus | Status |
+|------|-------|--------|
+| **Week 1** | Understand & Plan — business understanding, data profiling, predictive problem definition, target assessment, candidate features, hypotheses, modelling plan | ✅ Complete |
+| **Week 2** | Analyse & Prepare — data cleaning, formal hypothesis testing (EDA), feature engineering, baseline model, initial evaluation | ✅ Complete |
+| **Week 3** | Develop & Integrate — model comparison (4 models), error analysis, refinement, cross-track documentation | ✅ Complete |
+| **Week 4** | Test, Refine & Present — final feature review, final model evaluation, threshold-tuned validation on a held-out test set, final presentation | ✅ Complete |
+
+## 📁 Repository Structure
+
+```
+fintrust-data-science/
+├── README.md
+├── data/
+│   ├── raw/                              # Original FinTrust source files (not modified)
+│   └── processed/                        # Cleaned, joined, model-ready datasets (v1 → v3 final)
+├── models/
+│   ├── final_fitted_models.pkl           # All 4 fitted pipelines, final feature set
+│   └── final_predictions.pkl             # Stored validation/test probabilities
+├── src/
+│   ├── 01_final_feature_review.py        # Week 4 — permutation-importance-based feature pruning
+│   ├── 02_final_model_evaluation.py      # Week 4 — retrain & compare 4 models on final features
+│   ├── 03_error_analysis.py              # Week 4 — confusion matrix & false-positive/negative profiling
+│   ├── 04_final_interpretation_and_validation.py  # Week 4 — interpretation + threshold tuning + test-set validation
+│   └── 05_comparison_chart.py            # Week 4 — final ROC/PR curve comparison
+├── reports/
+│   ├── Week1_Understand_and_Plan.docx
+│   ├── Week2_Analyse_and_Prepare.docx
+│   ├── Week3_Develop_and_Integrate.docx
+│   ├── Week4_Test_Refine_and_Present.docx
+│   ├── week4_final_summary.json          # Final tuned-threshold validation & test metrics
+│   └── figures/                          # Saved charts (EDA, PR curves, feature importance)
+└── requirements.txt
+```
+
+## 🔑 Key Findings
+
+- **Risk_Review_Flag** is moderately imbalanced: 19.6% of transactions are flagged.
+- Four transaction-level hypotheses were confirmed with high statistical significance: **international transactions**, **transfers/cash withdrawals**, **large amounts** (top decile), and **overnight transactions** (00:00–05:00) all show substantially higher flag rates.
+- **Permutation importance overturned built-in feature importance.** Customer-level attributes (tenure, digital engagement score, account status, income band, prior flag rate) looked plausible early on but were confirmed — twice, across Week 3 and Week 4, using two different importance methods — to contribute nothing or actively hurt model performance. All five were formally removed in the final feature set.
+- **`Transaction_Type` and transaction amount are the strongest predictors** of risk review, by a wide margin, in both the final Random Forest and a Logistic Regression cross-check.
+- **Accuracy is a misleading headline metric for this problem.** The highest-"accuracy" model (Gradient Boosting, ~79%) caught only 5% of actually-flagged transactions. The final model trades some accuracy for a threshold tuned to catch ~79% of flagged transactions — the right trade-off for a manual-review use case, where a missed risk case is costlier than a false alarm.
+- **Final model validated with no overfitting:** at the tuned decision threshold, recall was *identical* between the validation set (79.2%) and a completely held-out test set (79.2%), with all other metrics within ~2.6 percentage points.
+- `Transaction_Status` was screened for label leakage via chi-square testing early in the project and deliberately excluded from every feature version.
+
+## 📊 Final Model
+
+| | |
+|---|---|
+| **Model** | Random Forest (`n_estimators=300`, `max_depth=8`, `class_weight='balanced'`) |
+| **Final feature count** | 11 (down from 16, evidence-based removal) |
+| **Tuned decision threshold** | 0.438 (from default 0.5) |
+| **Test-set precision** | 0.261 |
+| **Test-set recall** | 0.792 |
+| **Test-set F1** | 0.393 |
+| **Test-set ROC-AUC** | 0.672 |
+
+## 🛠️ Tech Stack
+
+`Python` · `Pandas` · `NumPy` · `Scikit-learn` · `SciPy` · `Matplotlib` / `Seaborn` · `Jupyter` · `Git` / `GitHub`
+
+## ⚠️ Limitations
+
+This project uses **synthetic data** generated for educational purposes, covering roughly 90 days of transactions. `Risk_Review_Flag` is an illustrative label, not a real fraud or compliance determination, and findings here are not intended to reflect real-world banking risk patterns. The final model's precision (~26%) means most flags are false alarms — acceptable for a manual-review triage tool, not for an automated blocking decision. The model also under-performs on smaller, daytime, non-Transfer transactions. No official output from other FinTrust tracks (Data Analytics, ML Engineering, etc.) was available during this project, so no actual cross-track integration occurred — this is documented directly rather than overstated. Full detail on all assumptions and limitations is in each week's report.
+
+## 🙏 Acknowledgements
+
+Built as part of the **AnalystLab Africa Experience Lab Internship Programme**. Thank you to AnalystLab Africa for the opportunity and the structured, portfolio-ready format of this project.
+
+`#AnalystLabAfrica`
+
+---
+*Project completed 9 October 2026.*
